@@ -1,10 +1,7 @@
-import { Block, CollectionConfig } from 'payload/types'
+import { Block } from 'payload/types'
 
-export const QuoteBlock: Block = {
+export const Quote: Block = {
   slug: 'Quote', // required
-  imageURL: 'https://google.com/path/to/image.jpg',
-  imageAltText: 'A nice thumbnail image to show what this block looks like',
-  interfaceName: 'QuoteBlock', // optional
   fields: [
     // required
     {
