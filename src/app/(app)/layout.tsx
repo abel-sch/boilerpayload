@@ -2,6 +2,7 @@ import React from 'react'
 import './globals.scss'
 import { Inter } from 'next/font/google'
 import { Header } from '@/components/blocks/Header'
+import { TransitionProvider } from '@/providers/TransitionProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -14,7 +15,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <html className={inter.className}>
       <body>
         <Header/>
-        {children}
+        <TransitionProvider>
+          {children}
+        </TransitionProvider>
       </body>
     </html>
   )
