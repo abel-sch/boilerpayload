@@ -1,38 +1,45 @@
 {
-  "name": "vercel-deploy-payload-postgres",
+  "name": "next-latest-starter",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "ci": "payload migrate && pnpm build",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "generate:types": "payload generate:types"
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+    "generate:types": "payload generate:types",
+    "standalone-script": "tsx ./src/scripts/standalone-script.ts"
+  },
+  "engines": {
+    "node": ">=18.19.0"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "3.0.0-beta.10",
-    "@payloadcms/next": "3.0.0-beta.10",
-    "@payloadcms/plugin-cloud-storage": "3.0.0-beta.10",
-    "@payloadcms/richtext-lexical": "3.0.0-beta.10",
+    "@payloadcms/db-postgres": "3.0.0-beta.11",
+    "@payloadcms/next": "3.0.0-beta.11",
+    "@payloadcms/richtext-lexical": "3.0.0-beta.11",
+    "@payloadcms/richtext-slate": "3.0.0-beta.11",
+    "@payloadcms/plugin-cloud-storage": "3.0.0-beta.11",
     "@vercel/blob": "^0.22.3",
+    "@payloadcms/ui": "3.0.0-beta.11",
     "cross-env": "^7.0.3",
-    "next": "14.2.0-canary.33",
-    "payload": "3.0.0-beta.10",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^14.2.0",
+    "payload": "3.0.0-beta.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sharp": "0.32.6"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+    "@types/node": "^20.11.25",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.1.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.2"
+  },
+  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
 }

@@ -25,6 +25,6 @@ export const Pages: CollectionConfig = {
         beforeValidate: [formatSlug('title')],
       },
     },
-    // ...renderPageTemplateFields()
+    ...renderPageTemplateFields()
   ],
 }

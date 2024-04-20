@@ -28,6 +28,7 @@ const renderTemplateBlocks = () => {
             name: `${templateKey}Layout`,
             type: 'blocks',
             minRows: 1,
+            localized: true,
             maxRows: 20,
             blocks: template.blocks,
             admin: {
