@@ -1,6 +1,7 @@
 import React from 'react'
 import './globals.scss'
 import { Inter } from 'next/font/google'
+import { Header } from '@/components/blocks/Header'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -11,7 +12,10 @@ const inter = Inter({
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html className={inter.className}>
-      <body>{children}</body>
+      <body>
+        <Header/>
+        {children}
+      </body>
     </html>
   )
 }

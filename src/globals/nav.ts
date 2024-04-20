@@ -11,7 +11,8 @@ const Nav: GlobalConfig = {
         {
           name: 'page',
           type: 'relationship',
-          relationTo: 'pages', // "pages" is the slug of an existing collection
+          relationTo: 'pages',
+          required: true
         },
       ],
     },
