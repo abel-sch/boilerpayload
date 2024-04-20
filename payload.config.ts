@@ -29,6 +29,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { Media } from '@/collections/Media'
 import { Users } from '@/collections/Users'
 import { Pages } from '@/collections/Pages'
+import Nav from '@/globals/nav'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -41,6 +42,7 @@ export default buildConfig({
     fallback: true,
   },
   collections: [Users, Media, Pages],
+  globals: [Nav],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

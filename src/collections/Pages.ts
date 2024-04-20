@@ -10,6 +10,9 @@ export const Pages: CollectionConfig = {
       revalidatePage,
     ],
   },
+  admin: {
+    useAsTitle: 'title',
+  },
   fields: [
     {
       name: 'title',
