@@ -1,9 +1,15 @@
 import type { CollectionConfig } from 'payload/types'
 import { renderPageTemplateFields } from '@/utils/helpers'
 import formatSlug from '@/utils/formatSlug'
+import { revalidate, revalidatePage } from '@/utils/revalidate'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  hooks: {
+    afterChange: [
+      revalidatePage,
+    ],
+  },
   fields: [
     {
       name: 'title',
