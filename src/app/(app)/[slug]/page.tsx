@@ -2,6 +2,7 @@ import { getPageBySlug } from "@/api/pages"
 import { notFound } from "next/navigation"
 
 export default async function Page({ params }: { params: { slug: string } }) {
+    console.log(params.slug, 'hoi')
     const page = await getPageBySlug(params.slug)
 
     if (!page) notFound()
