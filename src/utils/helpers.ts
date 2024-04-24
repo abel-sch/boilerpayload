@@ -12,7 +12,7 @@ const renderTemplateSelect = (): Field => {
         options: Object.keys(Templates).map((key) => {
             return {
                 label: Templates[key].name,
-                value: key,
+                value: `${key}Layout`,
             }
         }),
         defaultValue: Object.keys(Templates)[0],
@@ -33,7 +33,7 @@ const renderTemplateBlocks = () => {
             blocks: template.blocks,
             admin: {
             condition: (data) => {
-                return data.template === templateKey
+                return data.template === `${templateKey}Layout`
             }
             },
         }

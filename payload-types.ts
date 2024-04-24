@@ -65,30 +65,22 @@ export interface Page {
   id: string;
   title: string;
   slug?: string | null;
-  template?: ('Default' | 'Home') | null;
-  DefaultLayout?:
-    | (
-        | {
-            quoteHeader: string;
-            quoteText?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'Quote';
-          }
-        | SliderBlock
-      )[]
-    | null;
-  HomeLayout?:
-    | {
-        quoteHeader: string;
-        quoteText?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'Quote';
-      }[]
-    | null;
+  template?: ('DefaultLayout' | 'HomeLayout') | null;
+  DefaultLayout?: (Quote | SliderBlock)[] | null;
+  HomeLayout?: Quote[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Quote".
+ */
+export interface Quote {
+  quoteHeader: string;
+  quoteText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Quote';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
