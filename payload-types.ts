@@ -16,6 +16,7 @@ export interface Config {
   };
   globals: {
     navigation: Navigation;
+    siteOptions: SiteOption;
   };
   locale: 'en' | 'nl';
   user: User & {
@@ -27,7 +28,7 @@ export interface Config {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -44,7 +45,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -61,7 +62,7 @@ export interface Media {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number;
+  id: string;
   title: string;
   slug?: string | null;
   template?: ('Default' | 'Home') | null;
@@ -96,7 +97,7 @@ export interface Page {
 export interface SliderBlock {
   imageSlider?:
     | {
-        image: number | Media;
+        image: string | Media;
         caption?: string | null;
         id?: string | null;
       }[]
@@ -110,10 +111,10 @@ export interface SliderBlock {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -133,7 +134,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -144,13 +145,23 @@ export interface PayloadMigration {
  * via the `definition` "navigation".
  */
 export interface Navigation {
-  id: number;
+  id: string;
   menu?:
     | {
-        page: number | Page;
+        page: string | Page;
         id?: string | null;
       }[]
     | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteOptions".
+ */
+export interface SiteOption {
+  id: string;
+  homepage?: (string | null) | Page;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

@@ -30,6 +30,9 @@ import { Media } from '@/collections/Media'
 import { Users } from '@/collections/Users'
 import { Pages } from '@/collections/Pages'
 import Nav from '@/globals/nav'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import SiteOptions from '@/globals/siteOptions'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -42,19 +45,19 @@ export default buildConfig({
     fallback: true,
   },
   collections: [Users, Media, Pages],
-  globals: [Nav],
+  globals: [Nav, SiteOptions],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URL,
-    },
-  }),
-  // db: mongooseAdapter({
-  //   url: process.env.MONGODB_URI || '',
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.POSTGRES_URL,
+  //   },
   // }),
+  db: mongooseAdapter({
+    url: process.env.MONGODB_URI || '',
+  }),
 
   /**
    * Payload can now accept specific translations from 'payload/i18n/en'

@@ -1,11 +1,11 @@
-import { getPageBySlug } from "@/api/pages"
-import { notFound } from "next/navigation"
+import { getHomePage, getPageBySlug } from "@/api/pages"
+import { notFound, redirect } from "next/navigation"
 
 export default async function Page({ params }: { params: { slug: string } }) {
-    console.log(params.slug, 'hoi')
-    const page = await getPageBySlug(params.slug)
+    const [page, homepage] = await Promise.all([getPageBySlug(params.slug), getHomePage()])
 
     if (!page) notFound()
+    if (page.slug == homepage?.slug) redirect('/')
 
     return <div>{ page.title }</div>
 }

@@ -1,52 +1,14 @@
-import { Badge } from '@/components/Badge'
-import { Background } from '@/components/Background'
-import Link from 'next/link'
-import React from 'react'
+import { getHomePage, getPageBySlug } from "@/api/pages"
+import { notFound } from "next/navigation"
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import { getGlobalSettings } from "@/api/settings"
+import { Page } from "payload-types"
 
-const Page = () => {
-  return (
-    <>
-      <main>
-        <article>
-          <Badge />
-          <h1>Payload 3.0</h1>
-          <p>
-            This BETA is rapidly evolving, you can report any bugs against{' '}
-            <Link href="https://github.com/payloadcms/payload-3.0-demo/issues" target="_blank">
-              the repo
-            </Link>{' '}
-            or in the{' '}
-            <Link
-              href="https://discord.com/channels/967097582721572934/1215659716538273832"
-              target="_blank"
-            >
-              dedicated channel in Discord
-            </Link>
-            . Payload is running at <Link href="/admin">/admin</Link>. An example of a custom route
-            running the Local API can be found at <Link href="/my-route">/my-route</Link>.
-          </p>
-          <p>You can use the Local API in your server components like this:</p>
-        </article>
-        <div className="codeBlock">
-          <pre>
-            <code>
-              {`import { getPayload } from 'payload'
-import configPromise from "@payload-config";
-const payload = await getPayload({ config: configPromise })
+export default async function HomePage() {
+  const homepage = await getHomePage()
 
-const data = await payload.find({
-  collection: 'posts',
-})
-
-return <Posts data={data} />
-`}
-            </code>
-          </pre>
-        </div>
-      </main>
-      <Background />
-    </>
-  )
+  if (!homepage) notFound()
+  
+    return <div>{ homepage.title }</div>
 }
-
-export default Page
