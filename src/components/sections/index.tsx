@@ -3,11 +3,13 @@
 import { Page } from "payload-types";
 import { Quote } from "./Quote";
 
-type DefaultLayoutType = Page['DefaultLayout'];
-type HomeLayoutType = Page['HomeLayout'];
+type TemplateType = NonNullable<Page['template']>;
+type SectionType = {
+    [T in TemplateType]: Page[T];
+  }[TemplateType];
 
-export function SectionRenderer({sections} : {sections: DefaultLayoutType | HomeLayoutType}) {
 
+export function SectionRenderer({sections} : {sections: SectionType}) {
     return (
         <>
             {sections && sections.map((section, i) => {
