@@ -32,13 +32,13 @@ export const getPageBySlug = async (slug: string) => {
 }
 
 export const getHomePage = async () => {
-    const { homepage } = await getGlobalSettings()
-    const slug = homepage != null && typeof homepage != 'string' ? homepage.slug : null
+    // const { homepage } = await getGlobalSettings()
+    // const slug = homepage != null && typeof homepage != 'string' ? homepage.slug : null
   
   
-    if (!slug) return null
+    // if (!slug) return null
   
-    const page = await getPageBySlug(slug)
+    const page = await getPageBySlug('')
 
     if (!page) return null
 
