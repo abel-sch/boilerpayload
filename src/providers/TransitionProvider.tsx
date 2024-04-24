@@ -28,7 +28,7 @@ export const TransitionProvider = ({ children }: { children: ReactNode}) => {
     return (
 
         <div className="transition">
-            { isTransitioning && <div className="fixed bottom-4 right-4 rounded-sm bg-red-800 text-white p-4">Transitioning to: {targetHref}</div>}
+            { isTransitioning && <div className="fixed bottom-4 right-4 rounded-full text-black bg-red-200 px-4 py-2">Transitioning to: {targetHref}</div>}
             {children}
         </div>
     );
