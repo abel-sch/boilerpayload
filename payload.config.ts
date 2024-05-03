@@ -61,14 +61,7 @@ export default buildConfig({
       connectionString: process.env.POSTGRES_URL,
     },
   }),
-  // db: mongooseAdapter({
-  //   url: process.env.MONGODB_URI || '',
-  // }),
 
-  /**
-   * Payload can now accept specific translations from 'payload/i18n/en'
-   * This is completely optional and will default to English if not provided
-   */
   i18n: {
     supportedLanguages: { en },
   },
@@ -96,12 +89,6 @@ export default buildConfig({
       })
     }
   },
-  // // Sharp is now an optional dependency -
-  // // if you want to resize images, crop, set focal point, etc.
-  // // make sure to install it and pass it to the config.
-
-  // // This is temporary - we may make an adapter pattern
-  // // for this before reaching 3.0 stable
   sharp,
   plugins: [
     cloudStorage({
