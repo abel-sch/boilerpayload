@@ -9,13 +9,12 @@ const renderTemplateSelect = (): Field => {
     return {
         name: 'template',
         type: 'select',
-        options: Object.keys(Templates).map((key) => {
-            return {
+        options: Object.keys(Templates).map((key) => ({
                 label: Templates[key].name,
                 value: `${key}Layout`,
-            }
-        }),
-        defaultValue: Object.keys(Templates)[0],
+            })
+        ),
+        defaultValue: `${Object.keys(Templates)[0]}Layout`,
         admin: {
             position: 'sidebar',
         },
