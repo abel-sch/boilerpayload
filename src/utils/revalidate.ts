@@ -1,34 +1,30 @@
-import type { Payload } from 'payload'
+import { revalidateTag } from 'next/cache'
 
 export const revalidate = async (args: {
-//   collection: string
-  slug: string
-//   payload: Payload
+  slug?: string
+  collection?: string
+  tags?: string[]
 }): Promise<void> => {
-  const { slug } = args
-  const collection = 'pages'
+  const { slug, collection, tags } = args
 
-  try {
-    const res = await fetch(
-        `http://localhost:3000/api/revalidate?&collection=${collection}&slug=${slug}`
-    //   `${process.env.PAYLOAD_PUBLIC_APP_URL}/api/revalidate?secret=${process.env.REVALIDATION_KEY}&collection=${collection}&slug=${slug}`,
-    )
+  if (collection && slug) {
+    revalidateTag(`${collection}_${slug}`)
+  }
 
-    if (res.ok) {
-      console.log(`Revalidated page '${slug}' in collection '${collection}'`)
-    } else {
-      console.error(
-        `Error revalidating page '${slug}' in collection '${collection}': ${res}`,
-      )
-    }
-  } catch (err: unknown) {
-    console.error(
-      `Error hitting revalidate route for page '${slug}' in collection '${collection}': ${err}`,
-    )
+  if (tags) {
+    tags.forEach((tag) => {
+      revalidateTag(tag)
+    })
   }
 }
 
-export const revalidatePage = ({ doc }: { doc: any}) => {
-    console.log('start revalidating page', doc.slug)
-    revalidate({ slug: doc.slug })
+export const revalidatePage = ({ doc, previousDoc}: { doc: any, previousDoc: any}) => {
+    revalidate({ slug: doc.slug, collection: 'pages' })
+    if (previousDoc?.slug != doc?.slug) {
+      revalidate({ slug: previousDoc.slug, collection: 'pages' })
+    }
+}
+
+export const revalidateNavigation = () => {
+  revalidate({ tags: ['menu'] })
 }

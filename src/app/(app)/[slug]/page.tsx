@@ -1,9 +1,9 @@
-import { getHomePage, getPageBySlug } from "@/api/pages"
+import { getPageBySlug } from "@/api/pages"
 import Page from "@/components/layouts/Page"
-import { notFound, redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 
 export default async function SlugPage({ params }: { params: { slug: string } }) {
-    const [page, homepage] = await Promise.all([getPageBySlug(params.slug), getHomePage()])
+    const page = await getPageBySlug(params.slug)
 
     if (!page) notFound()
 

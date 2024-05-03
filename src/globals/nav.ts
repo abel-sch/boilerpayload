@@ -1,7 +1,13 @@
+import { revalidateNavigation } from '@/utils/revalidate'
 import { GlobalConfig } from 'payload/types'
 
 const Nav: GlobalConfig = {
   slug: 'navigation',
+  hooks: {
+    afterChange: [
+      revalidateNavigation,
+    ],
+  },
   fields: [
     {
       name: 'menu',

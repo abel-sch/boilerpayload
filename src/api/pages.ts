@@ -1,7 +1,6 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { unstable_cache } from 'next/cache';
-import { getGlobalSettings } from './settings';
  
 export const getPageBySlug = async (slug: string) => {
     const cachedPage = unstable_cache(
@@ -25,19 +24,13 @@ export const getPageBySlug = async (slug: string) => {
             }
         },
     undefined,
-    { tags: [`pages_${slug}`, 'pages'], revalidate: 3600 }
+    { tags: [`pages_${slug}`, 'pages'], revalidate: 36000 }
     );
 
     return cachedPage(slug)
 }
 
 export const getHomePage = async () => {
-    // const { homepage } = await getGlobalSettings()
-    // const slug = homepage != null && typeof homepage != 'string' ? homepage.slug : null
-  
-  
-    // if (!slug) return null
-  
     const page = await getPageBySlug('')
 
     if (!page) return null
