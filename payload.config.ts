@@ -32,6 +32,7 @@ import { Pages } from '@/collections/Pages'
 import Nav from '@/globals/nav'
 // import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import SiteOptions from '@/globals/siteOptions'
+import { resendAdapter } from '@payloadcms/email-resend'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -45,11 +46,16 @@ export default buildConfig({
     fallback: true,
   },
   collections: [Users, Media, Pages],
-  globals: [Nav, SiteOptions],
+  globals: [Nav],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  email: resendAdapter({
+    defaultFromAddress: 'onboarding@resend.dev',
+    defaultFromName: 'Payload CMS',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   db: postgresAdapter({
     pool: {
       connectionString: process.env.POSTGRES_URL,
