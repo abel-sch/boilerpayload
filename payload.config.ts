@@ -102,7 +102,7 @@ export default buildConfig({
 
   // // This is temporary - we may make an adapter pattern
   // // for this before reaching 3.0 stable
-  // sharp,
+  sharp,
   plugins: [
     cloudStorage({
       collections: {
