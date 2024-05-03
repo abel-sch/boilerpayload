@@ -30,7 +30,7 @@ import { Media } from '@/collections/Media'
 import { Users } from '@/collections/Users'
 import { Pages } from '@/collections/Pages'
 import Nav from '@/globals/nav'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+// import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import SiteOptions from '@/globals/siteOptions'
 
 const filename = fileURLToPath(import.meta.url)
@@ -50,14 +50,14 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  // db: postgresAdapter({
-  //   pool: {
-  //     connectionString: process.env.POSTGRES_URL,
-  //   },
-  // }),
-  db: mongooseAdapter({
-    url: process.env.MONGODB_URI || '',
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.POSTGRES_URL,
+    },
   }),
+  // db: mongooseAdapter({
+  //   url: process.env.MONGODB_URI || '',
+  // }),
 
   /**
    * Payload can now accept specific translations from 'payload/i18n/en'
