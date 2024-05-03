@@ -14,7 +14,7 @@
     "standalone-script": "tsx ./src/scripts/standalone-script.ts"
   },
   "engines": {
-    "node": "^18.20.2 || >=20.6.0"
+    "node": "^18.20.2"
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "3.0.0-beta.23",
