@@ -28,7 +28,7 @@ export interface Config {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -45,7 +45,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -62,7 +62,7 @@ export interface Media {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   slug?: string | null;
   template?: ('DefaultLayout' | 'HomeLayout') | null;
@@ -89,7 +89,7 @@ export interface Quote {
 export interface SliderBlock {
   imageSlider?:
     | {
-        image: string | Media;
+        image: number | Media;
         caption?: string | null;
         id?: string | null;
       }[]
@@ -103,10 +103,10 @@ export interface SliderBlock {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -126,7 +126,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -137,10 +137,10 @@ export interface PayloadMigration {
  * via the `definition` "navigation".
  */
 export interface Navigation {
-  id: string;
+  id: number;
   menu?:
     | {
-        page: string | Page;
+        page: number | Page;
         id?: string | null;
       }[]
     | null;
@@ -152,8 +152,8 @@ export interface Navigation {
  * via the `definition` "siteOptions".
  */
 export interface SiteOption {
-  id: string;
-  homepage?: (string | null) | Page;
+  id: number;
+  homepage?: (number | null) | Page;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
