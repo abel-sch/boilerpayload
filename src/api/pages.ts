@@ -12,9 +12,10 @@ export const getPageBySlug = async (slug: string) => {
             const { docs } = await payload.find({
             collection: 'pages',
             depth: 1,
+            draft: false,
             pagination: false,
             where:
-                { slug: { equals: slug } }, limit: 1
+                { slug: { equals: slug }, _status: { equals: 'published'} }, limit: 1
             })
         
             if (docs.length === 0) {

@@ -10,6 +10,9 @@ export const Pages: CollectionConfig = {
       revalidatePage,
     ],
   },
+  versions: {
+    drafts: true,
+  },
   admin: {
     useAsTitle: 'title',
   },
