@@ -20,8 +20,7 @@ import {
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
 //import { slateEditor } from '@payloadcms/richtext-slate'
-import { vercelBlobAdapter } from '@payloadcms/plugin-cloud-storage/vercelBlob'
-import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
@@ -91,15 +90,20 @@ export default buildConfig({
   },
   sharp,
   plugins: [
-    cloudStorage({
+    s3Storage({
       collections: {
-        [Media.slug]: {
-          adapter: vercelBlobAdapter({
-            token: process.env.BLOB_READ_WRITE_TOKEN || '',
-          }),
-          disableLocalStorage: true,
-          disablePayloadAccessControl: true,
+        [Media.slug]: true,
+      },
+      disableLocalStorage: true,
+      bucket: 'check',
+      config: {
+        forcePathStyle: true,
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID as string,
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY as string,
         },
+        region: process.env.S3_REGION,
+        endpoint: process.env.S3_ENDPOINT,
       },
     }),
   ],
