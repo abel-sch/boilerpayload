@@ -3,6 +3,7 @@
 import { Page } from "payload-types";
 import { Quote } from "./Quote";
 import { Slider } from "./Slider";
+import { RichContent } from "./RichContent";
 
 type TemplateType = NonNullable<Page['template']>;
 type SectionType = {
@@ -20,6 +21,8 @@ export function SectionRenderer({sections} : {sections: SectionType}) {
                     return <Quote key={i} {...section} />
                 } else if (section.blockType === "Slider") {
                     return <Slider key={i} {...section}/>
+                } else if (section.blockType === "RichContent") {
+                    return <RichContent key={i} {...section}/>
                 }
             })}
         </>

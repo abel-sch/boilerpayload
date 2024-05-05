@@ -3,6 +3,7 @@ import { Block } from 'payload/types'
 export const Quote: Block = {
   slug: 'Quote', // required
   interfaceName: 'Quote', // required
+  dbName: 'qte', // required
   fields: [
     // required
     {

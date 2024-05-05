@@ -19,22 +19,24 @@
   "dependencies": {
     "@payloadcms/db-mongodb": "3.0.0-beta.23",
     "@payloadcms/db-postgres": "3.0.0-beta.23",
+    "@payloadcms/email-resend": "3.0.0-beta.23",
     "@payloadcms/next": "3.0.0-beta.23",
     "@payloadcms/plugin-cloud-storage": "3.0.0-beta.23",
     "@payloadcms/richtext-lexical": "3.0.0-beta.23",
     "@payloadcms/richtext-slate": "3.0.0-beta.23",
-    "@payloadcms/email-resend": "3.0.0-beta.23",
     "@payloadcms/ui": "3.0.0-beta.23",
     "@vercel/blob": "^0.22.3",
     "cross-env": "^7.0.3",
+    "escape-html": "^1.0.3",
     "next": "^14.3.0-canary.7",
     "payload": "3.0.0-beta.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "zustand": "^4.5.2",
-    "sharp": "0.32.6"
+    "sharp": "0.32.6",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/escape-html": "^1.0.4",
     "@types/node": "^20.11.25",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",

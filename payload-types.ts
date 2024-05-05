@@ -16,7 +16,6 @@ export interface Config {
   };
   globals: {
     navigation: Navigation;
-    siteOptions: SiteOption;
   };
   locale: 'en' | 'nl';
   user: User & {
@@ -67,9 +66,10 @@ export interface Page {
   slug?: string | null;
   template?: ('DefaultLayout' | 'HomeLayout') | null;
   DefaultLayout?: (Quote | SliderBlock)[] | null;
-  HomeLayout?: Quote[] | null;
+  HomeLayout?: (Quote | RichContent)[] | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -97,6 +97,30 @@ export interface SliderBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Slider';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichContent".
+ */
+export interface RichContent {
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'RichContent';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -144,16 +168,6 @@ export interface Navigation {
         id?: string | null;
       }[]
     | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "siteOptions".
- */
-export interface SiteOption {
-  id: number;
-  homepage?: (number | null) | Page;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
