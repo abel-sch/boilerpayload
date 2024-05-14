@@ -24,7 +24,7 @@ export const getPageBySlug = async (slug: string) => {
                 return docs[0]
             }
         },
-    undefined,
+    ['pages'],
     { tags: [`pages_${slug}`, 'pages'], revalidate: 36000 }
     );
 

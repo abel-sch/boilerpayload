@@ -16,7 +16,7 @@ export const getMenu = async () => {
 
               return menu
         },
-        undefined,
+        ['menu'],
         { tags: ['menu'], revalidate: 10 }
     );
 
