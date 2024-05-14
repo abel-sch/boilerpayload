@@ -11,6 +11,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    articles: Article;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -64,9 +65,9 @@ export interface Page {
   id: number;
   title: string;
   slug?: string | null;
-  template?: ('DefaultLayout' | 'HomeLayout') | null;
-  DefaultLayout?: (Quote | SliderBlock | SplitContent)[] | null;
-  HomeLayout?: (Quote | RichContent)[] | null;
+  template?: ('DefaultSections' | 'HomeSections') | null;
+  DefaultSections?: (Quote | SliderBlock | SplitContent)[] | null;
+  HomeSections?: (Quote | RichContent | FeaturedArticles)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -146,6 +147,29 @@ export interface RichContent {
   id?: string | null;
   blockName?: string | null;
   blockType: 'RichContent';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedArticles".
+ */
+export interface FeaturedArticles {
+  title: string;
+  articles?: (number | Article)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'FeaturedArticles';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: number;
+  title: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

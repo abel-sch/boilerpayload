@@ -13,6 +13,7 @@ import { resendAdapter } from '@payloadcms/email-resend'
 import { Users } from '@/cms/fields/collections/Users'
 import { Pages } from '@/cms/fields/collections/Pages'
 import Nav from '@/cms/fields/globals/nav'
+import { Articles } from '@/cms/fields/collections/Articles'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +25,7 @@ export default buildConfig({
     defaultLocale: 'en',
     fallback: true,
   },
-  collections: [Users, Media, Pages],
+  collections: [Users, Media, Pages, Articles],
   globals: [Nav],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

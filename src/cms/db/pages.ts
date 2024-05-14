@@ -2,8 +2,8 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { unstable_cache as cache } from 'next/cache';
  
-export const getPageBySlug = async (slug: string) => {
-    const cachedPage = cache(
+export const getPageBySlug = async (slug: string, tags: string[] = []) => {
+    return cache(
         async (slug) => {
             const payload = await getPayload({
                 config: configPromise,
@@ -24,11 +24,9 @@ export const getPageBySlug = async (slug: string) => {
                 return docs[0]
             }
         },
-    ['pages'],
-    { tags: [`pages_${slug}`, 'pages'], revalidate: 36000 }
-    );
-
-    return cachedPage(slug)
+        ['pages'],
+        { tags: [`pages_${slug}`, ...tags], revalidate: 36000 }
+    )(slug);
 }
 
 export const getHomePage = async () => {
