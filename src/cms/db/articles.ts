@@ -24,7 +24,6 @@ export const getArticleBySlug = async (slug: string, tags: string[] = [] ) => {
             if (docs.length === 0) {
                 return null
             } else {
-                console.log(docs)
                 return docs[0]
             }
         },

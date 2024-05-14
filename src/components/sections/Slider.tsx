@@ -4,7 +4,6 @@ import Image from "next/image";
 import { SliderBlock } from "payload-types"
 
 export function Slider({ imageSlider} : SliderBlock) {
-    // console.log(imageSlider)
     return (
         <div className="w-3/4 mx-auto my-4 bg-slate-400 flex flex-col p-12 gap-4 rounded-md">
             { imageSlider && imageSlider.map((slide, i) => {
