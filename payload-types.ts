@@ -65,7 +65,7 @@ export interface Page {
   title: string;
   slug?: string | null;
   template?: ('DefaultLayout' | 'HomeLayout') | null;
-  DefaultLayout?: (Quote | SliderBlock)[] | null;
+  DefaultLayout?: (Quote | SliderBlock | SplitContent)[] | null;
   HomeLayout?: (Quote | RichContent)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -97,6 +97,31 @@ export interface SliderBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Slider';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SplitContent".
+ */
+export interface SplitContent {
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: number | Media | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'SplitContent';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
