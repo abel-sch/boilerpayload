@@ -14,7 +14,7 @@ import type { SerializedLexicalNode } from './RichTextNodeFormat';
 import { RichBlock } from './RichBlocks';
 
 interface Props {
-  blocks: Record<string, React.FC<any>>
+  blocks?: Record<string, React.FC<any>>
   nodes: SerializedLexicalNode[]
 }
 
