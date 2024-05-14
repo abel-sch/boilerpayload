@@ -9,7 +9,7 @@ export const TransitionProvider = ({ children }: { children: ReactNode}) => {
     const setTargetHref = useStore((state) => state.setTargetHref)
     const router = useRouter()
     const pathname = usePathname()
-    const isTransitioning = targetHref !== pathname.replace(/^\/+/g, '') && targetHref !== null
+    const isTransitioning = targetHref !== null && targetHref.replace(/^\/+/g, '') !== pathname.replace(/^\/+/g, '')
 
     useLayoutEffect(() => {
         let timeout: NodeJS.Timeout | null = null;
@@ -25,11 +25,11 @@ export const TransitionProvider = ({ children }: { children: ReactNode}) => {
         }
 
     }, [targetHref, router, setTargetHref])
-    return (
 
+    return (
         <div className="transition">
             { isTransitioning && <div className="fixed bottom-4 right-4 rounded-full text-black bg-red-200 px-4 py-2">Transitioning to: {targetHref}</div>}
-            {children}
+            { children }
         </div>
     );
 }

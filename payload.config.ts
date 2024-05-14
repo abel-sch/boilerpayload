@@ -1,68 +1,47 @@
 import path from 'path'
-// import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
 import {
-  AlignFeature,
-  BlockQuoteFeature,
-  BlocksFeature,
-  BoldFeature,
-  CheckListFeature,
-  HeadingFeature,
-  IndentFeature,
-  InlineCodeFeature,
-  ItalicFeature,
   lexicalEditor,
-  LinkFeature,
-  OrderedListFeature,
-  ParagraphFeature,
-  RelationshipFeature,
-  UnorderedListFeature,
-  UploadFeature,
 } from '@payloadcms/richtext-lexical'
-//import { slateEditor } from '@payloadcms/richtext-slate'
-import { vercelBlobAdapter } from '@payloadcms/plugin-cloud-storage/vercelBlob'
-import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { Media } from '@/collections/Media'
-import { Users } from '@/collections/Users'
-import { Pages } from '@/collections/Pages'
-import Nav from '@/globals/nav'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import SiteOptions from '@/globals/siteOptions'
+import { Media } from '@/cms/fields/collections/Media'
+import { resendAdapter } from '@payloadcms/email-resend'
+import { Users } from '@/cms/fields/collections/Users'
+import { Pages } from '@/cms/fields/collections/Pages'
+import Nav from '@/cms/fields/globals/nav'
+import { Articles } from '@/cms/fields/collections/Articles'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  //editor: slateEditor({}),
   editor: lexicalEditor(),
   localization: {
     locales: ['en', 'nl'],
     defaultLocale: 'en',
     fallback: true,
   },
-  collections: [Users, Media, Pages],
-  globals: [Nav, SiteOptions],
+  collections: [Users, Media, Pages, Articles],
+  globals: [Nav],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  // db: postgresAdapter({
-  //   pool: {
-  //     connectionString: process.env.POSTGRES_URL,
-  //   },
-  // }),
-  db: mongooseAdapter({
-    url: process.env.MONGODB_URI || '',
+  email: resendAdapter({
+    defaultFromAddress: 'onboarding@resend.dev',
+    defaultFromName: 'Payload CMS',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.POSTGRES_URL,
+    },
   }),
 
-  /**
-   * Payload can now accept specific translations from 'payload/i18n/en'
-   * This is completely optional and will default to English if not provided
-   */
   i18n: {
     supportedLanguages: { en },
   },
@@ -90,24 +69,14 @@ export default buildConfig({
       })
     }
   },
-  // Sharp is now an optional dependency -
-  // if you want to resize images, crop, set focal point, etc.
-  // make sure to install it and pass it to the config.
-
-  // This is temporary - we may make an adapter pattern
-  // for this before reaching 3.0 stable
   sharp,
   plugins: [
-    cloudStorage({
+    vercelBlobStorage({
+      enabled: true,
       collections: {
-        [Media.slug]: {
-          adapter: vercelBlobAdapter({
-            token: process.env.BLOB_READ_WRITE_TOKEN || '',
-          }),
-          disableLocalStorage: true,
-          disablePayloadAccessControl: true,
-        },
+        [Media.slug]: true,
       },
-    }),
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    })
   ],
 })
