@@ -3,10 +3,10 @@ import path from 'path'
 import { en } from 'payload/i18n/en'
 import {
   AlignFeature,
-  BlockQuoteFeature,
+  BlockquoteFeature,
   BlocksFeature,
   BoldFeature,
-  CheckListFeature,
+  ChecklistFeature,
   HeadingFeature,
   IndentFeature,
   InlineCodeFeature,
@@ -19,9 +19,7 @@ import {
   UnorderedListFeature,
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
-//import { slateEditor } from '@payloadcms/richtext-slate'
-import { vercelBlobAdapter } from '@payloadcms/plugin-cloud-storage/vercelBlob'
-import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
@@ -31,7 +29,6 @@ import { Users } from '@/collections/Users'
 import { Pages } from '@/collections/Pages'
 import Nav from '@/globals/nav'
 // import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import SiteOptions from '@/globals/siteOptions'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 const filename = fileURLToPath(import.meta.url)
@@ -91,16 +88,14 @@ export default buildConfig({
   },
   sharp,
   plugins: [
-    cloudStorage({
+    vercelBlobStorage({
+      enabled: true,
+      // Specify which collections should use Vercel Blob
       collections: {
-        [Media.slug]: {
-          adapter: vercelBlobAdapter({
-            token: process.env.BLOB_READ_WRITE_TOKEN || '',
-          }),
-          disableLocalStorage: true,
-          disablePayloadAccessControl: true,
-        },
+        [Media.slug]: true,
       },
-    }),
+      // Token provided by Vercel once Blob storage is added to your Vercel project
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    })
   ],
 })

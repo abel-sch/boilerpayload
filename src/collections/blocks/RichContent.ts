@@ -1,6 +1,5 @@
 import {
   BlocksFeature,
-  LexicalBlock,
   LinkFeature,
   UploadFeature,
   lexicalEditor
@@ -22,7 +21,7 @@ export const RichContent: Block = {
           // directly in the Lexical editor as follows:
           BlocksFeature({
             blocks: [
-              Quote as LexicalBlock,
+              Quote,
             ],
           }),
         ]
