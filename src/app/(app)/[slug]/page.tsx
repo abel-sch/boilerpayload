@@ -1,4 +1,4 @@
-import { getPageBySlug } from "@/api/pages"
+import { getPageBySlug } from "@/cms/db/pages"
 import Page from "@/components/layouts/Page"
 import { notFound } from "next/navigation"
 

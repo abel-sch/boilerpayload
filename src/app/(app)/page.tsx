@@ -1,4 +1,4 @@
-import { getHomePage } from "@/api/pages"
+import { getHomePage } from "@/cms/db/pages"
 import Page from "@/components/layouts/Page"
 import { notFound } from "next/navigation"
 

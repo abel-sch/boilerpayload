@@ -1,4 +1,4 @@
-import { getMenu } from "@/api/menu"
+import { getMenu } from "@/cms/db/menu"
 import { Button } from "../parts/Button"
 
 export const Header = async () => {

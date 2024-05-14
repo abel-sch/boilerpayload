@@ -1,41 +1,23 @@
 import path from 'path'
-// import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
 import {
-  AlignFeature,
-  BlockquoteFeature,
-  BlocksFeature,
-  BoldFeature,
-  ChecklistFeature,
-  HeadingFeature,
-  IndentFeature,
-  InlineCodeFeature,
-  ItalicFeature,
   lexicalEditor,
-  LinkFeature,
-  OrderedListFeature,
-  ParagraphFeature,
-  RelationshipFeature,
-  UnorderedListFeature,
-  UploadFeature,
 } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { Media } from '@/collections/Media'
-import { Users } from '@/collections/Users'
-import { Pages } from '@/collections/Pages'
-import Nav from '@/globals/nav'
-// import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { Media } from '@/cms/fields/collections/Media'
 import { resendAdapter } from '@payloadcms/email-resend'
+import { Users } from '@/cms/fields/collections/Users'
+import { Pages } from '@/cms/fields/collections/Pages'
+import Nav from '@/cms/fields/globals/nav'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  //editor: slateEditor({}),
   editor: lexicalEditor(),
   localization: {
     locales: ['en', 'nl'],
@@ -90,11 +72,9 @@ export default buildConfig({
   plugins: [
     vercelBlobStorage({
       enabled: true,
-      // Specify which collections should use Vercel Blob
       collections: {
         [Media.slug]: true,
       },
-      // Token provided by Vercel once Blob storage is added to your Vercel project
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     })
   ],

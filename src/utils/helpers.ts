@@ -1,4 +1,4 @@
-import { Templates } from "@/collections/templates"
+import { Templates } from "@/cms/fields/collections/templates"
 import { Field } from "payload/types"
 
 export const renderPageTemplateFields = () => {
@@ -11,10 +11,10 @@ const renderTemplateSelect = (): Field => {
         type: 'select',
         options: Object.keys(Templates).map((key) => ({
                 label: Templates[key].name,
-                value: `${key}Layout`,
+                value: `${key}Sections`,
             })
         ),
-        defaultValue: `${Object.keys(Templates)[0]}Layout`,
+        defaultValue: `${Object.keys(Templates)[0]}Sections`,
         admin: {
             position: 'sidebar',
         },
@@ -24,7 +24,8 @@ const renderTemplateSelect = (): Field => {
 const renderTemplateBlocks = () => {
     return Object.entries(Templates).map(([templateKey, template]): Field => {
         return {
-            name: `${templateKey}Layout`,
+            name: `${templateKey}Sections`,
+            label: 'Sections',
             type: 'blocks',
             minRows: 1,
             localized: true,
