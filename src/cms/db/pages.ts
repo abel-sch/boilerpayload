@@ -8,7 +8,7 @@ export const getPageBySlug = async (slug: string) => {
             const payload = await getPayload({
                 config: configPromise,
               })
-        
+
             const { docs } = await payload.find({
             collection: 'pages',
             depth: 1,
