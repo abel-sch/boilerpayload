@@ -6,8 +6,7 @@ export const revalidate = async (args: {
   tags?: string[]
 }): Promise<void> => {
   const { slug, collection, tags } = args
-
-  if (collection && slug) {
+  if (collection && slug != undefined) {
     revalidateTag(`${collection}_${slug}`)
   }
 
