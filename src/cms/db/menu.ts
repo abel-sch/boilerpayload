@@ -1,9 +1,9 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { unstable_cache } from 'next/cache';
+import { unstable_cache as cache } from 'next/cache';
  
 export const getMenu = async () => {
-    const cachedMenu = unstable_cache(
+    const cachedMenu = cache(
         async () => {
             const payload = await getPayload({
                 config: configPromise,
