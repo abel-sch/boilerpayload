@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { Fragment } from 'react'
 
 import escapeHTML from 'escape-html';
