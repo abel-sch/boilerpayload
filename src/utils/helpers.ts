@@ -33,7 +33,7 @@ const renderTemplateBlocks = () => {
             blocks: template.blocks,
             admin: {
             condition: (data) => {
-                return data.template === `${templateKey}Layout`
+                return data.template === `${templateKey}Sections`
             }
             },
         }
