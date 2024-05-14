@@ -11,12 +11,12 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    articles: Article;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   globals: {
     navigation: Navigation;
-    siteOptions: SiteOption;
   };
   locale: 'en' | 'nl';
   user: User & {
@@ -28,7 +28,7 @@ export interface Config {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -45,7 +45,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -62,14 +62,15 @@ export interface Media {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   slug?: string | null;
-  template?: ('DefaultLayout' | 'HomeLayout') | null;
-  DefaultLayout?: (Quote | SliderBlock)[] | null;
-  HomeLayout?: Quote[] | null;
+  template?: ('DefaultSections' | 'HomeSections') | null;
+  DefaultSections?: (Quote | SliderBlock | SplitContent)[] | null;
+  HomeSections?: (Quote | RichContent | FeaturedArticles)[] | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -89,7 +90,7 @@ export interface Quote {
 export interface SliderBlock {
   imageSlider?:
     | {
-        image: string | Media;
+        image: number | Media;
         caption?: string | null;
         id?: string | null;
       }[]
@@ -100,13 +101,85 @@ export interface SliderBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SplitContent".
+ */
+export interface SplitContent {
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: number | Media | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'SplitContent';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichContent".
+ */
+export interface RichContent {
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'RichContent';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedArticles".
+ */
+export interface FeaturedArticles {
+  title: string;
+  articles?: (number | Article)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'FeaturedArticles';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: number;
+  title: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -126,7 +199,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -137,23 +210,13 @@ export interface PayloadMigration {
  * via the `definition` "navigation".
  */
 export interface Navigation {
-  id: string;
+  id: number;
   menu?:
     | {
-        page: string | Page;
+        page: number | Page;
         id?: string | null;
       }[]
     | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "siteOptions".
- */
-export interface SiteOption {
-  id: string;
-  homepage?: (string | null) | Page;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

@@ -1,17 +1,17 @@
 import type { CollectionConfig } from 'payload/types'
-import { renderPageTemplateFields } from '@/utils/helpers'
 import formatSlug from '@/utils/formatSlug'
-import { revalidate, revalidatePage } from '@/utils/revalidate'
+import { revalidate, revalidateArticle, revalidatePage } from '@/utils/revalidate'
 
-export const Pages: CollectionConfig = {
-  slug: 'pages',
-  hooks: {
-    afterChange: [
-      revalidatePage,
-    ],
+export const Articles: CollectionConfig = {
+  slug: 'articles',
+  versions: {
+    drafts: true,
   },
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    afterChange: [revalidateArticle],
   },
   fields: [
     {
@@ -34,6 +34,5 @@ export const Pages: CollectionConfig = {
         beforeValidate: [formatSlug('title')],
       },
     },
-    ...renderPageTemplateFields()
   ],
 }
