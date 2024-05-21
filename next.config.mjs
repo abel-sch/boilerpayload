@@ -3,7 +3,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [{ hostname: "*.supabase.co" }],
+    remotePatterns: [{ hostname: "*.supabase.co" }, { hostname: "*.vercel.app" }],
   },
   logging: {
     fetches: {
