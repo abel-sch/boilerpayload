@@ -12,7 +12,6 @@ type SectionType = {
 
 
 export function SectionRenderer({sections} : {sections: SectionType}) {
-    console.log(sections, 'sections')
     return (
         <>
             {sections && sections.map((section, i) => {

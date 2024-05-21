@@ -4,7 +4,6 @@ import { SectionRenderer } from "../sections";
 export default function Sections({ page }: { page: Page}) {
     const { template } = page
     const templateLayout = template
-    console.log('templateLayout', page)
     if (!templateLayout) return null
 
 
