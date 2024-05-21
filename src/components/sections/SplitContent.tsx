@@ -3,6 +3,7 @@ import { SplitContent as SplitContentProps } from "payload-types"
 import { Serialize } from "../blocks/Serialize"
 import { SerializedLexicalNode } from "../blocks/RichTextNodeFormat"
 import Image from "next/image";
+import getUrl from "@/utils/url";
 
 
 export function SplitContent({ content, image } : SplitContentProps) {
@@ -11,12 +12,11 @@ export function SplitContent({ content, image } : SplitContentProps) {
     const { url, width, height } = image;
 
     if (!width || !height || !url) return null;
-    console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
 
     return (
         <div className="grid grid-cols-2 gap-8">
             { content && <Serialize nodes={content.root.children as SerializedLexicalNode[]} /> }
-            { image && <Image src={`https://boilerpayload.vercel.app${image.url}`} width={width} height={height} alt=""/> }
+            { image && <Image src={getUrl(image.url)} width={width} height={height} alt=""/> }
         </div>
     )
 }
