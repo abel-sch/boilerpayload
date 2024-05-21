@@ -65,7 +65,7 @@ export interface Page {
   id: number;
   title: string;
   slug?: string | null;
-  template?: ('DefaultSections' | 'HomeSections') | null;
+  template?: ('Default' | 'Home') | null;
   HomeHero?: {
     heading?: string | null;
     image?: number | Media | null;
