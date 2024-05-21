@@ -15,7 +15,7 @@ export function Slider({ imageSlider} : SliderBlock) {
 
                 if (!width || !height || !url) return null;
 
-                return <Image key={i} src={image.url} width={width} height={height} alt=""/>
+                return <Image key={i} src={`https://boilerpayload.vercel.app${image.url}`} width={width} height={height} alt=""/>
             })
             }
         </div>
