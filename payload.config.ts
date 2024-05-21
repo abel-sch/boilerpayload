@@ -78,7 +78,7 @@ export default buildConfig({
         [Media.slug]: true,
       },
       disableLocalStorage: true,
-      bucket: 'payload-bucket',
+      bucket: process.env.S3_BUCKET_NAME as string,
       config: {
         forcePathStyle: true,
         credentials: {
