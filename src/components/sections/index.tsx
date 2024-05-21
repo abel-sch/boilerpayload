@@ -6,17 +6,14 @@ import { SplitContent } from "./SplitContent";
 import { FeaturedArticles } from "./FeaturedArticles";
 
 type TemplateType = NonNullable<Page['template']>;
-
 type ApendSections<T> = T extends string ? `${T}Sections` : T;
 
-type SectionsType = ApendSections<TemplateType>;
-type SectionType = {
-    [T in SectionsType]: Page[T];
-  }[SectionsType];
+type SectionsPropType = ApendSections<TemplateType>;
+type SectionType = NonNullable<{
+    [T in SectionsPropType]: Page[T];
+  }[SectionsPropType]>;
 
-type NonNullableSectionType = NonNullable<SectionType>;
-
-export function SectionRenderer({sections} : {sections: NonNullableSectionType}) {
+export function SectionRenderer({sections} : {sections: SectionType}) {
     return (
         <>
             {sections && sections.map((section, i) => {
