@@ -4,7 +4,9 @@ import { SectionRenderer } from "../sections";
 export default function Sections({ page }: { page: Page}) {
     const { template } = page
     const templateLayout = template
+    console.log('templateLayout', page)
     if (!templateLayout) return null
+
 
     return (
         <div className="flex flex-col px-5">

@@ -66,6 +66,10 @@ export interface Page {
   title: string;
   slug?: string | null;
   template?: ('DefaultSections' | 'HomeSections') | null;
+  HomeHero?: {
+    heading?: string | null;
+    image?: number | Media | null;
+  };
   DefaultSections?: (Quote | SliderBlock | SplitContent)[] | null;
   HomeSections?: (Quote | RichContent | FeaturedArticles)[] | null;
   updatedAt: string;

@@ -28,10 +28,10 @@ const renderTemplateHero = () => {
             uniqueHeroes.add(template.hero)
             const conditions = conditionsMap.get(template.hero.name)
             if (conditions) {
-                conditions.push(`${templateKey}Template`)
+                conditions.push(`${templateKey}Sections`)
                 conditionsMap.set(template.hero.name, conditions)
             } else {
-                conditionsMap.set(template.hero.name, [`${templateKey}Template`])
+                conditionsMap.set(template.hero.name, [`${templateKey}Sections`])
             }
 
         }
@@ -69,10 +69,10 @@ const renderTemplateSelect = (): Field => {
         type: 'select',
         options: Object.keys(Templates).map((key) => ({
                 label: Templates[key].name,
-                value: `${key}Template`,
+                value: `${key}Sections`,
             })
         ),
-        defaultValue: `${Object.keys(Templates)[0]}Template`,
+        defaultValue: `${Object.keys(Templates)[0]}Sections`,
         admin: {
             position: 'sidebar',
         },
@@ -91,7 +91,7 @@ const renderTemplateBlocks = () => {
             blocks: template.blocks,
             admin: {
                 condition: (data) => {
-                    return data.template === `${templateKey}Template`
+                    return data.template === `${templateKey}Sections`
                 }
             },
         }
