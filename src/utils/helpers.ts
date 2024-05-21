@@ -1,8 +1,66 @@
 import { Templates } from "@/cms/fields/collections/templates"
-import { Field } from "payload/types"
+import { Page } from "payload-types"
+import { Condition, Field, GroupField } from "payload/types"
 
-export const renderPageTemplateFields = () => {
-    return [renderTemplateSelect(),...renderTemplateBlocks()]
+export const renderPageTemplateFields = (): Field[] => {
+
+    return [renderTemplateSelect(), {
+        type: 'tabs',
+        tabs: [
+            {
+                label: 'Hero',
+                fields: renderTemplateHero(),
+            },
+            {
+                label: 'Sections',
+                fields: renderTemplateBlocks(),
+            },
+        ]
+    }]
+}
+
+const renderTemplateHero = () => {
+    const uniqueHeroes = new Set<GroupField>()
+    const conditionsMap = new Map<string, string[]>()
+
+    Object.entries(Templates).forEach(([templateKey, template]) => {
+        if (template.hero) {
+            uniqueHeroes.add(template.hero)
+            const conditions = conditionsMap.get(template.hero.name)
+            if (conditions) {
+                conditions.push(`${templateKey}Template`)
+                conditionsMap.set(template.hero.name, conditions)
+            } else {
+                conditionsMap.set(template.hero.name, [`${templateKey}Template`])
+            }
+
+        }
+    })
+
+    const heroFields = Array.from(uniqueHeroes).map((hero) => {
+        return {
+            ...hero,
+            ...getHeroConditions(hero, conditionsMap)
+        }
+    })
+
+    return heroFields
+}
+
+const getHeroConditions = (hero: GroupField, conditionsMap: Map<string, string[]>): {} | {
+    admin: {
+        condition: Condition<Page>
+    }
+} => {
+    const conditions = conditionsMap.get(hero.name)
+    if (!conditions) return {}
+    return {
+        admin: {
+            condition: (data) => {
+                return data.template && conditions.includes(data.template)
+            }
+        }
+    }
 }
 
 const renderTemplateSelect = (): Field => {
@@ -11,10 +69,10 @@ const renderTemplateSelect = (): Field => {
         type: 'select',
         options: Object.keys(Templates).map((key) => ({
                 label: Templates[key].name,
-                value: `${key}Sections`,
+                value: `${key}Template`,
             })
         ),
-        defaultValue: `${Object.keys(Templates)[0]}Sections`,
+        defaultValue: `${Object.keys(Templates)[0]}Template`,
         admin: {
             position: 'sidebar',
         },
@@ -32,9 +90,9 @@ const renderTemplateBlocks = () => {
             maxRows: 20,
             blocks: template.blocks,
             admin: {
-            condition: (data) => {
-                return data.template === `${templateKey}Sections`
-            }
+                condition: (data) => {
+                    return data.template === `${templateKey}Template`
+                }
             },
         }
     })

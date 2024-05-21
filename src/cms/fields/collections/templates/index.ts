@@ -1,9 +1,10 @@
-import { Block } from "payload/types";
+import { Block, Field, GroupField } from "payload/types";
 import { Default } from "./Default";
 import { Home } from "./Home";
 
 interface Template {
     name: string;
+    hero?: GroupField;
     blocks: Block[];
 }
 
