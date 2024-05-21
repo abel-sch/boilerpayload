@@ -14,6 +14,8 @@ import { Users } from '@/cms/fields/collections/Users'
 import { Pages } from '@/cms/fields/collections/Pages'
 import Nav from '@/cms/fields/globals/nav'
 import { Articles } from '@/cms/fields/collections/Articles'
+import { s3Storage } from '@payloadcms/storage-s3'
+
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -71,12 +73,21 @@ export default buildConfig({
   },
   sharp,
   plugins: [
-    vercelBlobStorage({
-      enabled: true,
+    s3Storage({
       collections: {
         [Media.slug]: true,
       },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    })
+      disableLocalStorage: true,
+      bucket: 'check',
+      config: {
+        forcePathStyle: true,
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID as string,
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY as string,
+        },
+        region: process.env.S3_REGION,
+        endpoint: process.env.S3_ENDPOINT,
+      },
+    }),
   ],
 })
