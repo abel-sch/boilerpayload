@@ -78,7 +78,7 @@ export default buildConfig({
         [Media.slug]: true,
       },
       disableLocalStorage: true,
-      bucket: 'check',
+      bucket: 'payload-bucket',
       config: {
         forcePathStyle: true,
         credentials: {
