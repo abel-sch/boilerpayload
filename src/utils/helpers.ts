@@ -42,26 +42,30 @@ const renderTemplateHero = () => {
         return getHeroConditions(hero, conditionsMap)
     })
 
-    return heroFields
+    const currentHeroField: Field = {
+        name: 'currentHero',
+        type: 'text',
+        hidden: true,
+        hooks: {
+            beforeChange: [({data}) => {
+                if (!data || !data.template) return null
+                for (let [key, value] of conditionsMap.entries()) {
+                    if (value.includes(data.template)) {
+                        return key;
+                    }
+                }
+                return null;
+            }],
+          }
+    }
+
+    return [...heroFields, currentHeroField]
 }
 
 const getHeroConditions = (hero: GroupField, conditionsMap: Map<string, string[]>): GroupField => {
     const conditions = conditionsMap.get(hero.name)
 
     if (!conditions) return hero
-
-    const currentField: Field = {
-        name: 'current',
-        type: 'checkbox',
-        hidden: true,
-        hooks: {
-            beforeChange: [({data}) => {
-              return data && data.template && conditions.includes(data.template)
-            }],
-          }
-    }
-
-    hero.fields.push(currentField)
 
     return {
         ...hero,
