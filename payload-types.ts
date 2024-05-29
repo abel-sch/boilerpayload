@@ -68,6 +68,7 @@ export interface Page {
   template?: ('Default' | 'Home') | null;
   DefaultHero?: DefaultHero;
   HomeHero?: HomeHero;
+  currentHero?: ('DefaultHero' | 'HomeHero') | null;
   DefaultSections?: (Quote | SliderBlock | SplitContent)[] | null;
   HomeSections?: (Quote | RichContent | FeaturedArticles)[] | null;
   updatedAt: string;

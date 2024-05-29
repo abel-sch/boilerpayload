@@ -44,7 +44,8 @@ const renderTemplateHero = () => {
 
     const currentHeroField: Field = {
         name: 'currentHero',
-        type: 'text',
+        type: 'select',
+        options: heroFields.map((hero) => hero.name),
         hidden: true,
         hooks: {
             beforeChange: [({data}) => {
