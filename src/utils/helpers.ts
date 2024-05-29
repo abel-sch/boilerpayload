@@ -46,7 +46,9 @@ const renderTemplateHero = () => {
         name: 'currentHero',
         type: 'select',
         options: heroFields.map((hero) => hero.name),
-        hidden: true,
+        admin: {
+            condition: () => false
+        },
         hooks: {
             beforeChange: [({data}) => {
                 if (!data || !data.template) return null
