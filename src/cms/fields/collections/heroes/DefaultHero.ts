@@ -1,10 +1,10 @@
 import { Block, CollectionConfig, Field, GroupField } from 'payload/types'
 
-export const HomeHero: GroupField = {
-    name: 'HomeHero',
+export const DefaultHero: GroupField = {
+    name: 'DefaultHero',
     label: 'Hero',
-    interfaceName: 'HomeHero',
     type: 'group',
+    interfaceName: 'DefaultHero',
     fields: [
         {
             name: 'heading',
@@ -12,9 +12,9 @@ export const HomeHero: GroupField = {
             label: 'Heading',
         },
         {
-            name: 'image',
-            type: 'upload',
-            relationTo: 'media',
+            name: 'subHeading',
+            type: 'text',
+            label: 'Sub Heading',
         },
     ],
 }

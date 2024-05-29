@@ -66,15 +66,29 @@ export interface Page {
   title: string;
   slug?: string | null;
   template?: ('Default' | 'Home') | null;
-  HomeHero?: {
-    heading?: string | null;
-    image?: number | Media | null;
-  };
+  DefaultHero?: DefaultHero;
+  HomeHero?: HomeHero;
   DefaultSections?: (Quote | SliderBlock | SplitContent)[] | null;
   HomeSections?: (Quote | RichContent | FeaturedArticles)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DefaultHero".
+ */
+export interface DefaultHero {
+  heading?: string | null;
+  subHeading?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeHero".
+ */
+export interface HomeHero {
+  heading?: string | null;
+  image?: number | Media | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

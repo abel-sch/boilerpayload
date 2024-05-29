@@ -4,12 +4,13 @@ import { Slider } from "./Slider";
 import { RichContent } from "./RichContent";
 import { SplitContent } from "./SplitContent";
 import { FeaturedArticles } from "./FeaturedArticles";
+import { TemplateType } from "../layouts/Page";
 
-type TemplateType = NonNullable<Page['template']>;
 type ApendSections<T> = T extends string ? `${T}Sections` : T;
 
 type SectionsPropType = ApendSections<TemplateType>;
-type SectionType = NonNullable<{
+
+export type SectionType = NonNullable<{
     [T in SectionsPropType]: Page[T];
   }[SectionsPropType]>;
 

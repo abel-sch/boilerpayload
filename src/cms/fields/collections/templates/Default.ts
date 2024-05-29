@@ -1,10 +1,10 @@
 import { Quote } from "../blocks/Quote";
 import { Slider } from "../blocks/Slider";
 import { SplitContent } from "../blocks/SplitContent";
-import { HomeHero } from "../heroes/HomeHero";
+import { DefaultHero } from "../heroes/DefaultHero";
 
 export const Default = {
     name: 'Default',
-    hero: HomeHero,
+    hero: DefaultHero,
     blocks: [Quote, Slider, SplitContent],
 }

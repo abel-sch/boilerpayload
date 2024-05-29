@@ -1,6 +1,7 @@
 import { Templates } from "@/cms/fields/collections/templates"
 import { Page } from "payload-types"
 import { Condition, Field, GroupField } from "payload/types"
+import type { FieldHook } from 'payload/types'
 
 export const renderPageTemplateFields = (): Field[] => {
 
@@ -38,28 +39,37 @@ const renderTemplateHero = () => {
     })
 
     const heroFields = Array.from(uniqueHeroes).map((hero) => {
-        return {
-            ...hero,
-            ...getHeroConditions(hero, conditionsMap)
-        }
+        return getHeroConditions(hero, conditionsMap)
     })
 
     return heroFields
 }
 
-const getHeroConditions = (hero: GroupField, conditionsMap: Map<string, string[]>): {} | {
-    admin: {
-        condition: Condition<Page>
-    }
-} => {
+const getHeroConditions = (hero: GroupField, conditionsMap: Map<string, string[]>): GroupField => {
     const conditions = conditionsMap.get(hero.name)
-    if (!conditions) return {}
+
+    if (!conditions) return hero
+
+    const currentField: Field = {
+        name: 'current',
+        type: 'checkbox',
+        hidden: true,
+        hooks: {
+            beforeChange: [({data}) => {
+              return data && data.template && conditions.includes(data.template)
+            }],
+          }
+    }
+
+    hero.fields.push(currentField)
+
     return {
+        ...hero,
         admin: {
             condition: (data) => {
                 return data.template && conditions.includes(data.template)
             }
-        }
+        },
     }
 }
 
