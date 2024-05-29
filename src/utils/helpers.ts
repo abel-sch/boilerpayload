@@ -1,30 +1,37 @@
-import { Templates } from "@/cms/fields/collections/templates"
-import { Page } from "payload-types"
-import { Condition, Field, GroupField } from "payload/types"
-import type { FieldHook } from 'payload/types'
+import { PageTemplate } from "@/cms/fields/collections/templates"
+import { Field, GroupField } from "payload/types"
+import { Slug } from "@/cms/fields/collections/fields/slug"
 
-export const renderPageTemplateFields = (): Field[] => {
+type PageTemplateObject = Record<string, PageTemplate>
 
-    return [renderTemplateSelect(), {
+export const createPostType = (pageTemplates: PageTemplateObject) => {
+    return [
+        Slug,
+        ...renderPageTemplateFields(pageTemplates)
+    ]
+}
+
+export const renderPageTemplateFields = (pageTemplates: PageTemplateObject): Field[] => {
+    return [renderTemplateSelect(pageTemplates), {
         type: 'tabs',
         tabs: [
             {
                 label: 'Hero',
-                fields: renderTemplateHero(),
+                fields: renderTemplateHero(pageTemplates),
             },
             {
                 label: 'Sections',
-                fields: renderTemplateBlocks(),
+                fields: renderTemplateBlocks(pageTemplates),
             },
         ]
     }]
 }
 
-const renderTemplateHero = () => {
+const renderTemplateHero = (pageTemplates: PageTemplateObject) => {
     const uniqueHeroes = new Set<GroupField>()
     const conditionsMap = new Map<string, string[]>()
 
-    Object.entries(Templates).forEach(([templateKey, template]) => {
+    Object.entries(pageTemplates).forEach(([templateKey, template]) => {
         if (template.hero) {
             uniqueHeroes.add(template.hero)
             const conditions = conditionsMap.get(template.hero.name)
@@ -80,24 +87,24 @@ const getHeroConditions = (hero: GroupField, conditionsMap: Map<string, string[]
     }
 }
 
-const renderTemplateSelect = (): Field => {
+const renderTemplateSelect = (pageTemplates: PageTemplateObject): Field => {
     return {
         name: 'template',
         type: 'select',
-        options: Object.keys(Templates).map((key) => ({
-                label: Templates[key].name,
+        options: Object.keys(pageTemplates).map((key) => ({
+                label: pageTemplates[key].name,
                 value: `${key}`,
             })
         ),
-        defaultValue: `${Object.keys(Templates)[0]}`,
+        defaultValue: `${Object.keys(pageTemplates)[0]}`,
         admin: {
             position: 'sidebar',
         },
     }
 }
 
-const renderTemplateBlocks = () => {
-    return Object.entries(Templates).map(([templateKey, template]): Field => {
+const renderTemplateBlocks = (pageTemplates: PageTemplateObject) => {
+    return Object.entries(pageTemplates).map(([templateKey, template]): Field => {
         return {
             name: `${templateKey}Sections`,
             label: 'Sections',

@@ -1,7 +1,8 @@
 import type { CollectionConfig } from 'payload/types'
-import { renderPageTemplateFields } from '@/utils/helpers'
-import formatSlug from '@/utils/formatSlug'
-import { revalidate, revalidatePage } from '@/utils/revalidate'
+import { createPostType } from '@/utils/helpers'
+import { revalidatePage } from '@/utils/revalidate'
+import { Default } from './templates/Default'
+import { Home } from './templates/Home'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -24,19 +25,6 @@ export const Pages: CollectionConfig = {
       required: true,
       localized: true,
     },
-    {
-      name: 'slug',
-      label: 'Slug',
-      type: 'text',
-      index: true,
-      admin: {
-        position: 'sidebar',
-      },
-      unique: true,
-      hooks: {
-        beforeValidate: [formatSlug('title')],
-      },
-    },
-    ...renderPageTemplateFields()
+    ...createPostType({Default, Home})
   ],
 }

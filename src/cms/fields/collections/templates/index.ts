@@ -2,13 +2,13 @@ import { Block, Field, GroupField } from "payload/types";
 import { Default } from "./Default";
 import { Home } from "./Home";
 
-interface Template {
+export interface PageTemplate {
     name: string;
     hero?: GroupField;
     blocks: Block[];
 }
 
-export const Templates: Record<string, Template> = {
+export const Templates: Record<string, PageTemplate> = {
     Default,
     Home
 }
