@@ -1,4 +1,4 @@
-import { Block, CollectionConfig } from 'payload/types'
+import type { Block } from 'payload'
 
 export const Slider: Block = {
   slug: 'Slider', // required
@@ -28,13 +28,6 @@ export const Slider: Block = {
           type: 'text',
         },
       ],
-      admin: {
-        components: {
-          RowLabel: ({ data, index }) => {
-            return data?.title || `Slide ${String(index).padStart(2, '0')}`
-          },
-        },
-      },
     },
   ],
 }

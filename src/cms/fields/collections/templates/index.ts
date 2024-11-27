@@ -1,4 +1,4 @@
-import { Block, Field, GroupField } from "payload/types";
+import type { Block, Field, GroupField } from "payload";
 import { Default } from "./Default";
 import { Home } from "./Home";
 

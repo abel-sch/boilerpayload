@@ -1,4 +1,4 @@
-import { Page, DefaultHero as DefaultHeroT} from "payload-types"
+import type { Page, DefaultHero as DefaultHeroT} from "src/payload-types"
 
 export function DefaultHero({ page, hero }: { page: Page, hero: DefaultHeroT}) {
     return (

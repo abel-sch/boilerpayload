@@ -1,4 +1,4 @@
-import { RichContent as RichContentProps } from "payload-types"
+import type { RichContent as RichContentProps } from "src/payload-types"
 import { Serialize } from "../blocks/Serialize"
 import { SerializedLexicalNode } from "../blocks/RichTextNodeFormat"
 import { Quote } from "./Quote"

@@ -7,5 +7,5 @@ import { DefaultHero } from "../heroes/DefaultHero";
 export const Default: PageTemplate = {
     name: 'Default',
     hero: DefaultHero,
-    blocks: [Quote, Slider, SplitContent],
+    blocks: [Quote,Slider, SplitContent],
 }

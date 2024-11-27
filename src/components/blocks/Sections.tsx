@@ -1,7 +1,7 @@
-import { Page } from "payload-types";
-import { SectionRenderer } from "../sections";
+import type { Page } from "src/payload-types";
+import SectionRenderer from "../sections";
 
-export default function Sections({ page }: { page: Page}) {
+export default async function Sections({ page }: { page: Page}) {
     const { template } = page
     const templateLayout = template
 
@@ -10,6 +10,8 @@ export default function Sections({ page }: { page: Page}) {
     const pageSections = page[`${templateLayout}Sections`]
 
     if (!pageSections) return null
+
+    console.log(pageSections)
 
     return (
         <div className="flex flex-col px-5">

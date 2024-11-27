@@ -1,5 +1,5 @@
 import formatSlug from "@/utils/formatSlug";
-import { Field } from "payload/types";
+import type { Field } from "payload";
 
 export const Slug: Field = {
     name: 'slug',

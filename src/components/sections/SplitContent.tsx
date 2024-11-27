@@ -1,5 +1,5 @@
 'use client'
-import { SplitContent as SplitContentProps } from "payload-types"
+import type { SplitContent as SplitContentProps } from "src/payload-types"
 import { Serialize } from "../blocks/Serialize"
 import { SerializedLexicalNode } from "../blocks/RichTextNodeFormat"
 import Image from "next/image";

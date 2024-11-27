@@ -5,7 +5,7 @@ import {
   lexicalEditor
 } from '@payloadcms/richtext-lexical'
 import { Quote } from './Quote'
-import { Block } from 'payload/types'
+import type { Block } from 'payload'
 
 export const RichContent: Block = {
   slug: 'RichContent',
@@ -14,18 +14,7 @@ export const RichContent: Block = {
     {
       name: 'content',
       type: 'richText',
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          // This is incredibly powerful. You can re-use your Payload blocks
-          // directly in the Lexical editor as follows:
-          BlocksFeature({
-            blocks: [
-              Quote,
-            ],
-          }),
-        ]
-      })
+      editor: lexicalEditor()
     }
   ],
 }

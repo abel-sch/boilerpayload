@@ -1,5 +1,5 @@
 import { PageTemplate } from "@/cms/fields/collections/templates"
-import { Field, GroupField } from "payload/types"
+import type { Field, GroupField } from "payload"
 import { Slug } from "@/cms/fields/collections/fields/slug"
 
 type PageTemplateObject = Record<string, PageTemplate>

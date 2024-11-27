@@ -11,9 +11,7 @@ export const getMenu = async () => {
             const { menu } = await payload.findGlobal({
                 slug: 'navigation',
                 depth: 2,
-                locale: 'en',
               })
-
               return menu
         },
         ['menu'],

@@ -1,10 +1,10 @@
 'use client';
 
-import {
+import type {
     DefaultHero as DefaultHeroT,
     HomeHero as HomeHeroT,
     Page
-} from "payload-types";
+} from "src/payload-types";
 import { DefaultHero } from "../heroes/DefaultHero";
 import { HomeHero } from "../heroes/HomeHero";
 

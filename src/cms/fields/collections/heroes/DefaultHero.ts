@@ -1,4 +1,4 @@
-import { Block, CollectionConfig, Field, GroupField } from 'payload/types'
+import type { GroupField } from 'payload'
 
 export const DefaultHero: GroupField = {
     name: 'DefaultHero',

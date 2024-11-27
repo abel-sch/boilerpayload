@@ -1,4 +1,4 @@
-import { Quote as QuoteType} from "payload-types"
+import type { Quote as QuoteType} from "src/payload-types"
 
 export function Quote({ quoteHeader, quoteText} : QuoteType) {
     return (

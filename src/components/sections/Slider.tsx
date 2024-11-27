@@ -1,9 +1,10 @@
 'use client'
 
+import { imageUrl } from "@/utils/imageUrl";
 import Image from "next/image";
-import { SliderBlock } from "payload-types"
+import type { SliderBlock } from "src/payload-types"
 
-export function Slider({ imageSlider} : SliderBlock) {
+export default function Slider({ imageSlider} : SliderBlock) {
     return (
         <div className="w-3/4 mx-auto my-4 bg-slate-400 flex flex-col p-12 gap-4 rounded-md">
             { imageSlider && imageSlider.map((slide, i) => {
@@ -15,9 +16,8 @@ export function Slider({ imageSlider} : SliderBlock) {
 
                 if (!width || !height || !url) return null;
 
-                return <Image key={i} src={`https://boilerpayload.vercel.app${image.url}`} width={width} height={height} alt=""/>
-            })
-            }
+                return <Image key={i} src={imageUrl(url)} width={width} height={height} alt=""/>
+            })}
         </div>
     )
 }

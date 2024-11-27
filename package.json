@@ -1,54 +1,66 @@
 {
-  "name": "next-latest-starter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "A blank template to get started with Payload 3.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
-    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
-    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
-    "generate:types": "payload generate:types",
-    "standalone-script": "tsx ./src/scripts/standalone-script.ts"
-  },
-  "engines": {
-    "node": "^20.0.0"
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "start": "node .next/standalone/server.js"
   },
   "dependencies": {
-    "@payloadcms/db-mongodb": "3.0.0-beta.29",
-    "@payloadcms/db-postgres": "3.0.0-beta.29",
-    "@payloadcms/email-resend": "3.0.0-beta.29",
-    "@payloadcms/next": "3.0.0-beta.29",
-    "@payloadcms/storage-vercel-blob": "3.0.0-beta.29",
-    "@payloadcms/storage-s3": "3.0.0-beta.29",
-    "@payloadcms/richtext-lexical": "3.0.0-beta.29",
-    "@payloadcms/richtext-slate": "3.0.0-beta.29",
-    "@payloadcms/ui": "3.0.0-beta.29",
-    "@vercel/blob": "^0.22.3",
+    "@payloadcms/db-mongodb": "beta",
+    "@payloadcms/db-postgres": "beta",
+    "@payloadcms/email-resend": "beta",
+    "@payloadcms/next": "beta",
+    "@payloadcms/payload-cloud": "beta",
+    "@payloadcms/plugin-nested-docs": "beta",
+    "@payloadcms/plugin-redirects": "beta",
+    "@payloadcms/plugin-search": "beta",
+    "@payloadcms/plugin-seo": "beta",
+    "@payloadcms/richtext-lexical": "beta",
+    "@payloadcms/richtext-slate": "beta",
+    "@payloadcms/storage-s3": "beta",
+    "@types/escape-html": "^1.0.4",
     "cross-env": "^7.0.3",
-    "escape-html": "^1.0.3",
-    "next": "14.3.0-canary.37",
-    "payload": "3.0.0-beta.29",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "graphql": "^16.8.1",
+    "jsonwebtoken": "^9.0.2",
+    "lenis": "^1.1.14",
+    "next": "15.0.0",
+    "payload": "beta",
+    "react": "19.0.0-rc-65a56d0e-20241020",
+    "react-dom": "19.0.0-rc-65a56d0e-20241020",
     "sharp": "0.32.6",
-    "zustand": "^4.5.2"
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "@types/escape-html": "^1.0.4",
-    "@types/node": "^20.12.11",
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.21",
-    "autoprefixer": "^10.4.19",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.1.0",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
-    "tsx": "^4.7.1",
-    "typescript": "^5.4.2"
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^22.5.4",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.0",
+    "tailwindcss": "^3.4.15",
+    "typescript": "5.6.3"
   },
-  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
+  "engines": {
+    "node": "^18.20.2 || >=20.9.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-rc.1",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    }
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+  }
 }

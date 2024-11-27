@@ -1,5 +1,5 @@
 import { revalidateNavigation } from '@/utils/revalidate'
-import { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 
 const Nav: GlobalConfig = {
   slug: 'navigation',
