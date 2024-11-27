@@ -3,6 +3,7 @@ import './globals.scss'
 import { Inter } from 'next/font/google'
 import { Header } from '@/components/blocks/Header'
 import { TransitionProvider } from '@/providers/TransitionProvider'
+import { LivePreviewListener } from '@/providers/LivePreviewListener'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,6 +17,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <body>
         <Header/>
         <TransitionProvider>
+        <LivePreviewListener />
           {children}
         </TransitionProvider>
       </body>
