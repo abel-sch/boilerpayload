@@ -112,7 +112,7 @@ export interface Page {
   HomeHero?: HomeHero;
   DefaultHero?: DefaultHero;
   currentHero?: ('HomeHero' | 'DefaultHero') | null;
-  HomeSections?: (Quote | RichContent)[] | null;
+  HomeSections?: (Quote | RichContent | SliderBlock)[] | null;
   DefaultSections?: (Quote | SliderBlock | SplitContent)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -341,6 +341,19 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        Slider?:
+          | T
+          | {
+              imageSlider?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

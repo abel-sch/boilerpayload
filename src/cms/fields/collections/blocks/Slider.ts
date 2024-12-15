@@ -2,7 +2,6 @@ import type { Block } from 'payload'
 
 export const Slider: Block = {
   slug: 'Slider', // required
-  imageURL: 'https://google.com/path/to/image.jpg',
   imageAltText: 'A Slider',
   interfaceName: 'SliderBlock', // optional
   fields: [

@@ -14,7 +14,7 @@ export default async function Sections({ page }: { page: Page}) {
     console.log(pageSections)
 
     return (
-        <div className="flex flex-col px-5">
+        <div className="flex flex-col">
             <div className="text-xs opacity-50">template: { template}</div>
             <SectionRenderer sections={pageSections} />
         </div>
