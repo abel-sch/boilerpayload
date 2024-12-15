@@ -14,3 +14,10 @@ export const isAccessingSelf: Access = ({ id, req }) => {
 }
 
 export const isAdminOrSelf: Access = (args) => isAdmin(args) || isAccessingSelf(args)
+
+export const isAuthenticated: Access = (args) => {
+    if (!args.req.user) {
+        return false
+    }
+    return true
+}

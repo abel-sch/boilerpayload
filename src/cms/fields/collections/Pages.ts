@@ -4,6 +4,7 @@ import { revalidatePage } from '@/utils/revalidate'
 import { Default } from './templates/Default'
 import { Home } from './templates/Home'
 import { generatePreviewPath } from '@/utils/generatePreviewPath'
+import { isAuthenticated } from '@/utils/auth'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -42,6 +43,12 @@ export const Pages: CollectionConfig = {
       },
     },
     maxPerDoc: 20,
+  },
+  access: {
+    create: isAuthenticated,
+    read: isAuthenticated,
+    update: isAuthenticated,
+    delete: isAuthenticated
   },
   fields: [
     {
