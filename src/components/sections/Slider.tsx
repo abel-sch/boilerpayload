@@ -7,7 +7,7 @@ import type { SliderBlock } from "src/payload-types"
 export default function Slider({ imageSlider} : SliderBlock) {
     return (
         <div className="relative mx-auto my-4 rounded-md">
-            <div className="flex gap-4 px-4 overflow-x-auto snap-x snap-mandatory">
+            <div className="flex gap-4 px-4 overflow-x-auto scroll-px-4 snap-x snap-mandatory">
                 { imageSlider && imageSlider.map((slide, i) => {
                     const { image } = slide;
 
@@ -18,7 +18,7 @@ export default function Slider({ imageSlider} : SliderBlock) {
                     if (!width || !height || !url) return null;
 
                     return (
-                        <div key={i} className="scroll-p-4 snap-start shrink-0">
+                        <div key={i} className=" snap-start shrink-0">
                             <Image 
                                 src={imageUrl(url)} 
                                 width={width} 
