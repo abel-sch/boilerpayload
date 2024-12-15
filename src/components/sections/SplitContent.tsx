@@ -3,8 +3,6 @@ import type { SplitContent as SplitContentProps } from "src/payload-types"
 import { Serialize } from "../blocks/Serialize"
 import { SerializedLexicalNode } from "../blocks/RichTextNodeFormat"
 import Image from "next/image";
-import getUrl from "@/utils/url";
-
 
 export function SplitContent({ content, image } : SplitContentProps) {
     if (typeof image != 'object' || !image?.url) return null;
