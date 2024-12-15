@@ -16,7 +16,7 @@ export function SplitContent({ content, image } : SplitContentProps) {
     return (
         <div className="grid grid-cols-2 gap-8">
             { content && <Serialize nodes={content.root.children as SerializedLexicalNode[]} /> }
-            { image && <Image src={getUrl(image.url)} width={width} height={height} alt=""/> }
+            { image && <Image src={image.url} width={width} height={height} alt=""/> }
         </div>
     )
 }

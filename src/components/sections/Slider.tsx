@@ -1,6 +1,5 @@
 'use client'
 
-import { imageUrl } from "@/utils/imageUrl";
 import Image from "next/image";
 import type { SliderBlock } from "src/payload-types"
 
@@ -20,7 +19,7 @@ export default function Slider({ imageSlider} : SliderBlock) {
                     return (
                         <div key={i} className=" snap-start shrink-0">
                             <Image 
-                                src={imageUrl(url)} 
+                                src={image.url} 
                                 width={width} 
                                 height={height} 
                                 alt=""

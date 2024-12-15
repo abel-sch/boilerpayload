@@ -84,7 +84,11 @@ export default buildConfig({
     }),
     s3Storage({
       collections: {
-        [Media.slug]: true,
+        'media': {
+          generateFileURL: ({filename}) => {
+            return `${process.env.S3_PUBLIC_URL}/${filename}`
+          }
+        },
       },
       disableLocalStorage: true,
       bucket: process.env.S3_BUCKET_NAME as string,

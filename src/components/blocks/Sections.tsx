@@ -11,7 +11,7 @@ export default async function Sections({ page }: { page: Page}) {
 
     if (!pageSections) return null
 
-    console.log(pageSections)
+    // console.log(pageSections)
 
     return (
         <div className="flex flex-col">

@@ -2,6 +2,9 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
+const S3_IMAGES = process.env.S3_PUBLIC_URL ? [{
+  hostname: new URL(process.env.S3_PUBLIC_URL).hostname,
+}] : []
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,6 +18,7 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      ...S3_IMAGES,
     ],
   },
 }
