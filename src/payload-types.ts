@@ -36,7 +36,7 @@ export interface Config {
   globalsSelect: {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'nl';
   user: User & {
     collection: 'users';
   };

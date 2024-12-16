@@ -11,7 +11,6 @@ import { resendAdapter } from '@payloadcms/email-resend'
 import { Users } from '@/cms/fields/collections/Users'
 import { Pages } from '@/cms/fields/collections/Pages'
 import Nav from '@/cms/fields/globals/nav'
-// import { Articles } from '@/cms/fields/collections/Articles'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page } from 'src/payload-types'
@@ -58,6 +57,10 @@ export default buildConfig({
         },
       ],
     },
+  },
+  localization: {
+    locales: ['en', 'nl'], // required
+    defaultLocale: 'en', // required
   },
   editor: lexicalEditor(),
   collections: [Users, Media, Pages],

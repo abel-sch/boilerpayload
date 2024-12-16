@@ -34,6 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "lenis": "^1.1.14",
     "next": "^15",
+    "next-intl": "^3.26.1",
     "payload": "latest",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020",
